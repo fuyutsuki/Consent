@@ -26,7 +26,7 @@ use pocketmine\event\player\PlayerCommandPreprocessEvent;
 
 class Main extends PluginBase implements Listener{
   private $plugin = "Consent",
-          $version = "v1.0.1";
+          $version = "v1.0.2";
 
 	function onEnable(){
     $this->getLogger()->info(Color::GREEN.$this->plugin." ".$this->version." が読み込まれました。");
