@@ -7,6 +7,9 @@ use pocketmine\event\Listener;
 use pocketmine\Player;
 use pocketmine\Server;
 
+#Entity
+use pocketmine\entity\Entity;
+
 #Event
 use pocketmine\event\Event;
 use pocketmine\event\player\PlayerMoveEvent;
@@ -26,7 +29,7 @@ use pocketmine\event\player\PlayerCommandPreprocessEvent;
 
 class Main extends PluginBase implements Listener{
   private $plugin = "Consent",
-          $version = "v1.0.2";
+          $version = "v1.0.3";
 
 	function onEnable(){
     $this->getLogger()->info(Color::GREEN.$this->plugin." ".$this->version." が読み込まれました。");
@@ -67,6 +70,7 @@ class Main extends PluginBase implements Listener{
     //
     if (empty($this->flags[$n])) {
       $this->flags[$n] = 0;
+      $p->setDataFlag(Entity::DATA_FLAGS, Entity::DATA_FLAG_IMMOBILE, true);
       $p->sendPopup("§bチャット欄のサーバールールをお読み下さい。");
       $m = implode("\n", $this->config);
       $p->sendMessage($m."\n§fよろしければ、§b/agr §fと打ってください。");
@@ -84,6 +88,7 @@ class Main extends PluginBase implements Listener{
           $this->agrs[] = $n;
           $this->agrs_file->setAll($this->agrs);
           $this->agrs_file->save();
+          $s->setDataFlag(Entity::DATA_FLAGS, Entity::DATA_FLAG_IMMOBILE, false);
 
           $s->sendMessage("§bサーバールールに同意していただき、ありがとうございました。硬直を解除しました。");
         }
@@ -98,7 +103,6 @@ class Main extends PluginBase implements Listener{
     //
     if ($this->flags[$n] !== 1) {
       $p->sendPopup("§bチャット欄のサーバールールをお読み下さい。");
-      $e->setCancelled();
     }
   }
 

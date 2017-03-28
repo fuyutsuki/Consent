@@ -1,10 +1,10 @@
 name: Consent
 main: Consent\Main
-version: 1.0.2
+version: 1.0.3
 api: [1.0.0, 2.0.0]
 author: fuyutsuki
 
 commands:
   agr:
-    description: "サーバールールに同意し、ログインします。"
+    description: "サーバールールに同意します。"
     usage: "/agr"
